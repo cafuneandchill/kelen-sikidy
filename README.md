@@ -16,7 +16,7 @@ This program uses [Stack][stack] for building the binaries.
 To build and install the program, execute this command in the project's root:
 
 ```
-stack build --test --copy-bins --haddock kelen-sikidy-exe
+stack build --test --copy-bins --haddock
 ```
 
 For more info, see the Stack documentation.
