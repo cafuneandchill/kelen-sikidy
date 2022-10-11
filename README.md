@@ -22,3 +22,33 @@ stack build --test --copy-bins --haddock
 For more info, see the Stack documentation.
 
 [stack]: https://www.haskellstack.org/
+
+## Demonstration
+
+```console
+$ kelen-sikidy-exe 
+====== antāλōþa ======
+A Method of Divination
+https://www.terjemar.net/kelen/sikidy.php
+----------------------
+Generating the mother seed...
+Mother seed:
+1 0 0 0
+0 0 1 0
+0 1 1 0
+1 1 1 0
+
+Generating the daughter seed...
+Daughter seed:
+1 0 1 1 1 1 0 1
+0 0 0 1 0 1 1 1
+0 1 1 1 1 0 1 1
+0 0 0 1 0 1 1 1
+
+Interpreting the travel direction...
+Interpreting the art to study...
+Interpreting the duration of study...
+A simple question for antāλōþa is which direction to travel.
+The current configuration says rāhāwie or to the south-west.
+It also suggests that ankeīlke (visual design) would be a good art to study for the next 6 jālūi (weeks).
+```
