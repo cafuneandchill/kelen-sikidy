@@ -40,9 +40,4 @@ addCells x y
     | otherwise = White
 
 addCellLists :: [Cell] -> [Cell] -> [Cell]
-addCellLists xs ys
-    | length xs == length ys = zipWith addCells xs ys
-    | otherwise              = error 
-        ( "addCellLists:"
-        ++ " Lists should be of the same size"
-        )
+addCellLists = zipWith addCells
