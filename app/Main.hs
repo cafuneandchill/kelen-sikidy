@@ -37,23 +37,23 @@ main = do
         ++ " is which direction to travel.")
     putStrLn ("The current configuration says "
         ++ "\ESC[1;36m"
-        ++ Direction.toKelen d
+        ++ maybe "---" Direction.toKelen d
         ++ "\ESC[0m"
         ++ " or to the "
         ++ "\ESC[1m"
-        ++ show d
+        ++ maybe "---" Direction.toEnglish d
         ++ "\ESC[0m"
         ++ "."
         )
     putStrLn ("It also suggests that "
         ++ "\ESC[1;36m"
-        ++ Art.toKelen a
+        ++ maybe "---" Art.toKelen a
         ++ "\ESC[1;39m"
-        ++ " (" ++ show a ++ ")"
+        ++ " (" ++ maybe "---" Art.toEnglish a ++ ")"
         ++ "\ESC[0m"
         ++ " would be a good art to study for the next "
         ++ "\ESC[1m"
-        ++ show t
+        ++ maybe "0" show t
         ++ "\ESC[1;36m"
         ++ " jālūi"
         ++ "\ESC[0m"

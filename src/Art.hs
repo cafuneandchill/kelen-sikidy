@@ -1,6 +1,7 @@
 module Art
     ( Art (..)
     , art
+    , toEnglish
     , toKelen
     ) where
 
@@ -16,35 +17,37 @@ data Art
     | Dance
     | Healing
     | VisualDesign
-
-instance Show Art where
-    show Storytelling = "storytelling and music"
-    show Dance        = "dance and motion"
-    show Healing      = "healing and touch"
-    show VisualDesign = "visual design"
+    deriving Show
 
 {-|
     Interpret the art for studying from a daughter seed.
 -}
-art :: Seed.Seed -> Art
-art daughter@(Seed.Seed Seed.Daughter _) = getArt . artCellList $ daughter
-art _ = error "art: Wrong seed variant or malformed input"
+art :: Seed.Seed -> Maybe Art
+art = maybe Nothing getArt . artCellList
 
-artCellList :: Seed.Seed -> [Cell.Cell]
-artCellList seed = [a, b]
+artCellList :: Seed.Seed -> Maybe [Cell.Cell]
+artCellList daughter@(Seed.Seed Seed.Daughter _)
+    = Just [a, b]
   where
-    a = Seed.elemS seed (1, 4)
-    b = Seed.elemS seed (2, 4)
+    a = Seed.elemS daughter (1, 4)
+    b = Seed.elemS daughter (2, 4)
+artCellList _ = Nothing
 
-getArt :: [Cell.Cell] -> Art
+getArt :: [Cell.Cell] -> Maybe Art
 getArt cells
-    | x == "00" = Healing
-    | x == "01" = Storytelling
-    | x == "10" = Dance
-    | x == "11" = VisualDesign
-    | otherwise = error "getArt: Invalid input"
+    | x == "00" = Just Healing
+    | x == "01" = Just Storytelling
+    | x == "10" = Just Dance
+    | x == "11" = Just VisualDesign
+    | otherwise = Nothing
   where
     x = concatMap show cells
+
+toEnglish :: Art -> String
+toEnglish Healing      = "healing and touch"
+toEnglish Storytelling = "storytelling and music"
+toEnglish Dance        = "dance and motion"
+toEnglish VisualDesign = "visual design"
 
 toKelen :: Art -> String
 toKelen Healing      = "anālte"

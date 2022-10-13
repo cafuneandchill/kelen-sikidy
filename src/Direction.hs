@@ -1,6 +1,7 @@
 module Direction
     ( Direction (..)
     , direction
+    , toEnglish
     , toKelen
     ) where
 
@@ -26,22 +27,13 @@ data Direction
     | NorthEast 
     | North 
     | NorthWest
-
-instance Show Direction where
-    show SouthEast = "south-east"
-    show South     = "south"
-    show SouthWest = "south-west"
-    show West      = "west"
-    show East      = "east"
-    show NorthEast = "north-east"
-    show North     = "north"
-    show NorthWest = "north-west"
+    deriving Show
 
 {-| 
     Interpret the travel direction from a pair of a mother seed
     and a daughter seed.
 -}
-direction :: Seed.Seed -> Seed.Seed -> Direction
+direction :: Seed.Seed -> Seed.Seed -> Maybe Direction
 direction
     mother@(Seed.Seed Seed.Mother _)
     daughter@(Seed.Seed Seed.Daughter _)
@@ -58,7 +50,7 @@ direction
 
     toElems :: ((i, i), e) -> e
     toElems ((_, _), e) = e
-direction _ _ = error "direction: Invalid input"
+direction _ _ = Nothing
 
 directionCellArray
     :: Seed.Seed
@@ -78,20 +70,30 @@ directionCellArray m d = listArray ((1,1),(3,4)) (concat [x, y, z])
         (Seed.columnS s1 c1)
         (Seed.columnS s2 c2)
 
-getDirection :: [Cell.Cell] -> Direction
+getDirection :: [Cell.Cell] -> Maybe Direction
 getDirection cells
-    | x `elem` ["0000", "1111"] = SouthEast
-    | x `elem` ["0001", "1110"] = South
-    | x `elem` ["0010", "1101"] = SouthWest
-    | x `elem` ["0011", "1100"] = West
-    | x `elem` ["0100", "1011"] = East
-    | x `elem` ["0101", "1010"] = NorthEast
-    | x `elem` ["0110", "1001"] = North
-    | x `elem` ["0111", "1000"] = NorthWest
-    | otherwise                 = error "getDirection: Invalid array"
+    | x `elem` ["0000", "1111"] = Just SouthEast
+    | x `elem` ["0001", "1110"] = Just South
+    | x `elem` ["0010", "1101"] = Just SouthWest
+    | x `elem` ["0011", "1100"] = Just West
+    | x `elem` ["0100", "1011"] = Just East
+    | x `elem` ["0101", "1010"] = Just NorthEast
+    | x `elem` ["0110", "1001"] = Just North
+    | x `elem` ["0111", "1000"] = Just NorthWest
+    | otherwise                 = Nothing
   where
     x :: [Char]
     x = concatMap show cells
+
+toEnglish :: Direction -> String
+toEnglish SouthEast = "south-east"
+toEnglish South     = "south"
+toEnglish SouthWest = "south-west"
+toEnglish West      = "west"
+toEnglish East      = "east"
+toEnglish NorthEast = "north-east"
+toEnglish North     = "north"
+toEnglish NorthWest = "north-west"
 
 toKelen :: Direction -> String
 toKelen SouthEast = "rālātie"
