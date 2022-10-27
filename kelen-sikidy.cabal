@@ -6,12 +6,12 @@ cabal-version: 1.12
 
 name:           kelen-sikidy
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/kelen-sikidy#readme>
-homepage:       https://github.com/githubuser/kelen-sikidy#readme
-bug-reports:    https://github.com/githubuser/kelen-sikidy/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2022 Author name here
+description:    Please see the README on GitHub at <https://github.com/cafuneandchill/kelen-sikidy#readme>
+homepage:       https://github.com/cafuneandchill/kelen-sikidy#readme
+bug-reports:    https://github.com/cafuneandchill/kelen-sikidy/issues
+author:         cafuneandchill
+maintainer:     cafuneandchill@github.com
+copyright:      2022 cafuneandchill
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
@@ -21,7 +21,7 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/kelen-sikidy
+  location: https://github.com/cafuneandchill/kelen-sikidy
 
 library
   exposed-modules:
